@@ -12,6 +12,8 @@
 To run the tool:
 
 ```bash
+git clone https://github.com/Fejil-Francis/instaphish.git
+cd instaphish
 bash insta.sh
 ```
 
