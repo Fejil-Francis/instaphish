@@ -43,7 +43,7 @@ install_deps() {
 install_deps
 
 # Big banner
-figlet "INSTA-LINK"
+figlet "INSTAPHISH"
 
 echo "------------------------------------------"
 echo "1. Start Server & Generate Public URL"
