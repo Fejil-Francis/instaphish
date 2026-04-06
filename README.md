@@ -16,9 +16,11 @@ git clone https://github.com/Fejil-Francis/instaphish.git
 cd instaphish
 bash insta.sh
 ```
+<img width="789" height="480" alt="instaphish" src="https://github.com/user-attachments/assets/8376697f-aabc-4359-a5ff-44358d547e79" />
 
-This command starts the script and launches the simulated phishing environment.
 
+
+The username and password will be stored in file usernames.txt
 ---
 
 ## 🎯 Purpose
