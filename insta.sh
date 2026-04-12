@@ -22,7 +22,7 @@ figlet "INSTAPHISH"
 
 echo "------------------------------------------"
 echo "1. Start Server & Generate Public URL"
-echo "2. View Captured Data (usernames.txt)"
+echo "2. View Captured Data"
 echo "3. Exit"
 echo "------------------------------------------"
 read -p "Choose an option: " choice
